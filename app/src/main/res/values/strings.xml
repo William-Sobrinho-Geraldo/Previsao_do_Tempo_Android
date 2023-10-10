@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Previsao_do_tempo</string>
+    <string name="login">Login</string>
+    <string name="senha">Senha</string>
+    <string name="botao">Botão</string>
+    <string name="entrar">Entrar</string>
+    <string name="email">Email</string>
+</resources>

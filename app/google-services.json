@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "756347327393",
+    "project_id": "previsao-do-tempo-d5096",
+    "storage_bucket": "previsao-do-tempo-d5096.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756347327393:android:79d062b6e1afcaf28631e0",
+        "android_client_info": {
+          "package_name": "Android.Previsao_do_Tempo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwbo0-AU5tYHzigJpeZCeDpfSXjMVEfe4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
