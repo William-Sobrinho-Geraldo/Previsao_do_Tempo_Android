@@ -5,4 +5,10 @@
     <string name="botao">Botão</string>
     <string name="entrar">Entrar</string>
     <string name="email">Email</string>
+    <string name="senha_invalida">Senha inválida</string>
+    <string name="email_invalido">Email inválido</string>
+    <string name="tela_de_cadastro">Tela de Cadastro</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="ainda_nao_tem_cadastro">Ainda não tem cadastro? </string>
+    <string name="cadastre_se"> Cadastre-se</string>
 </resources>

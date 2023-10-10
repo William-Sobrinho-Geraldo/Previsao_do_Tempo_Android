@@ -3,6 +3,7 @@
 package Android.Previsao_do_Tempo
 
 import Android.Previsao_do_Tempo.databinding.ActivityMainBinding
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -27,58 +28,59 @@ class MainActivity : AppCompatActivity() {
         val email = binding.editTextEmail
         val password = binding.editTextPassWord
         val button = binding.botaoEntrar
+        val linkCadastro = binding.linkDeCadastro
 
-
+linkCadastro.setOnClickListener{
+    startActivity(Intent(this,CadastroActivity::class.java))
+}
 
 
 
         button.setOnClickListener {
             val emailValido = validaEmail(email.text.toString())
-            if (!emailValido) Toast.makeText(this, "Email INVÁLIDO", Toast.LENGTH_SHORT).show()
-
-            val senhaValida = validaSenha(password.text.toString())
-            if (!senhaValida) Toast.makeText(this, "Senha INVÁLIDA", Toast.LENGTH_SHORT).show()
-
-            val usuarioAutenticado = autenticaEmailEPassword(email.text.toString(), password.text.toString())
-            if (usuarioAutenticado) {
-                Log.i(TAG, "botão:  O botão foi clicado e o usuário está validado")
+            if (!emailValido) {
+                binding.textInputLayoutEmail.error = getString(R.string.email_invalido)
             }
 
+            val senhaValida = validaSenha(password.text.toString())
+            if (!senhaValida) {
+                binding.textInputLayoutSenha.error = getString(R.string.senha_invalida)
+            }
 
-            //Log.i(TAG, "onCreate:   O texto após o click no botão é ${email.text}")
-            //            Toast.makeText(this, "O texto após o click no botão é ${login.text}", Toast.LENGTH_SHORT).show()
+            autenticaEmailEPassword(email.text.toString(), password.text.toString()) { resultado ->
+                if (resultado) {
+                    // Autenticação bem sucedida - Navegar para outra tela
+                    // startActivity(Intent(this,CadastroActivity::class.java))
+                    Log.i(TAG, "onCreate:    PODE NAVEGAR PRA OUTRA TELA")
+                } else {
+                    Log.i(TAG, "onCreate: autenticação inválida")
+                }
+            }
         }
     }
 
-    //    public override fun onStart() {
-    //        super.onStart()
-    //        // Check if user is signed in (non-null) and update UI accordingly.
-    //        val currentUser = auth.currentUser
-    //        if (currentUser != null) {
-    //            reload()
-    //        }
-    //    }
 
-    fun autenticaEmailEPassword(email: String, password: String): Boolean {
-        var retorno = false
+    fun autenticaEmailEPassword(email: String, password: String, callback: (Boolean) -> Unit) {
+
         if (email.isEmpty() || password.isEmpty()) {
-            retorno = false
+            callback(false)
         } else {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
+                    val retorno = if (task.isSuccessful) {
                         val userLoged = auth.currentUser
                         Log.i(TAG, "LOGIN SUCESSO:  Usuário logado é ${userLoged?.email}")
-                        Toast.makeText(this, "Usuário logado é ${userLoged?.email}", Toast.LENGTH_SHORT).show()
-                        retorno = true
+                        Toast.makeText(this, "Usuário logado é ${userLoged?.email}", Toast.LENGTH_SHORT)
+                            .show()
+                        true
                     } else {
                         Log.w(TAG, "LOGIN FALHOU!! ", task.exception)
                         Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
-                        retorno = false
+                        false
                     }
+                    callback(retorno)
                 }
         }
-        return retorno
     }
 
     fun validaEmail(email: String): Boolean {
