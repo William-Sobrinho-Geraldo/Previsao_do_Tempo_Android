@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
             val senhaValida = validaSenha(password.text.toString())
             if (!senhaValida) Toast.makeText(this, "Senha INVÁLIDA", Toast.LENGTH_SHORT).show()
 
-            if (autenticaEmailEPassword(email.text.toString(), password.text.toString())) {
+            val usuarioAutenticado = autenticaEmailEPassword(email.text.toString(), password.text.toString())
+            if (usuarioAutenticado) {
                 Log.i(TAG, "botão:  O botão foi clicado e o usuário está validado")
             }
 
