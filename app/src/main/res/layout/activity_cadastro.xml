@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".CadastroActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tela_de_cadastro"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_Email_cadastro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_login"  />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gradient_login"
+        />
 
     <!--     TEXT LOGIN     -->
     <com.google.android.material.textfield.TextInputLayout
@@ -36,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintVertical_bias="0.48"
         app:layout_constraintWidth_percent="0.70">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -117,6 +118,7 @@
         android:id="@+id/botao_cadastrar"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.15"
         android:textSize="22sp"
         android:text="@string/cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="-12dp"
+        android:layout_marginEnd="-12dp"
+        android:src="@drawable/back4"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gradient_login"
+        />
 
     <!--     TEXT EMAIL     -->
     <com.google.android.material.textfield.TextInputLayout
@@ -25,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_bias="0.558"
         app:layout_constraintWidth_percent="0.70">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -75,6 +90,7 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:text="@string/entrar"
+        app:layout_constraintVertical_bias="0.45"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,9 +101,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:text="@string/ainda_nao_tem_cadastro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botao_entrar" />
 
@@ -100,6 +119,7 @@
         android:text="@string/cadastre_se"
         android:textColor="@color/azul"
         android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/Ainda_nao_tem_cadastro"
         app:layout_constraintTop_toBottomOf="@+id/botao_entrar" />
 
