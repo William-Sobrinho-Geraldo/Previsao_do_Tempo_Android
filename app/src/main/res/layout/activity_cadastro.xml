@@ -13,11 +13,10 @@
         android:text="@string/tela_de_cadastro"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_Email_cadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--     TEXT LOGIN     -->
     <com.google.android.material.textfield.TextInputLayout
@@ -37,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_bias="0.45"
         app:layout_constraintWidth_percent="0.70">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -65,6 +64,7 @@
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="3dp"
         app:hintEnabled="true"
+        app:passwordToggleEnabled="true"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +81,37 @@
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!--     TEXT CONFIRMAR SENHA     -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_confirmar_Password_cadastro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:boxBackgroundColor="@color/gray"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="3dp"
+        app:hintEnabled="true"
+        app:passwordToggleEnabled="true"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_Password_cadastro"
+        app:layout_constraintWidth_percent="0.70">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_confirmar_PassWord_cadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirmar_senha"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/botao_cadastrar"
@@ -91,7 +122,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_Password_cadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_confirmar_Password_cadastro" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

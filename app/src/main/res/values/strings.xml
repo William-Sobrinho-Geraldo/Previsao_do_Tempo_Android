@@ -12,4 +12,6 @@
     <string name="ainda_nao_tem_cadastro">Ainda não tem cadastro? </string>
     <string name="cadastre_se"> Cadastre-se</string>
     <string name="o_campo_email_nao_pode_estar_vazio">O campo Email não pode estar vazio</string>
+    <string name="confirmar_senha">Confirmar Senha</string>
+    <string name="senhas_diferentes">Senhas diferentes!</string>
 </resources>

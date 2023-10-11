@@ -18,38 +18,64 @@ class CadastroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCadastroBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         auth = Firebase.auth
+        //EDIT TEXTS
         val emailCadastro = binding.editTextEmailCadastro
-        val senhaCadastro = binding.editTextPassWordCadastro
+        val editTextPasswordCadastro = binding.editTextPassWordCadastro
+        val editTextConfirmarPasswordCadastro = binding.editTextConfirmarPassWordCadastro
+        var senhasIguais = false
+
+
+        //TEXT INPUT LAYOUTS
+        val inputLayoutEmailCadastro = binding.textInputLayoutEmailCadastro
+        val inputLayoutPasswordCadastro = binding.textInputLayoutPasswordCadastro
+        val inputLayoutConfirmaPasswordCadastro = binding.textInputLayoutConfirmarPasswordCadastro
+
         val buttonCadastrar = binding.botaoCadastrar
 
         buttonCadastrar.setOnClickListener {
             val emailValido = validaEmail(emailCadastro.text.toString(), this)
             if (!emailValido) {
-                binding.textInputLayoutEmailCadastro.error = getString(R.string.email_invalido)
-            }
+                inputLayoutEmailCadastro.error = getString(R.string.email_invalido)
+            } else inputLayoutEmailCadastro.error = ""
 
-            val senhaValida = validaSenha(senhaCadastro.text.toString())
+            val senhaValida = validaSenha(editTextPasswordCadastro.text.toString())
             if (!senhaValida) {
-                binding.textInputLayoutPasswordCadastro.error = getString(R.string.senha_invalida)
+                inputLayoutPasswordCadastro.error = getString(R.string.senha_invalida)
+                inputLayoutConfirmaPasswordCadastro.error = getString(R.string.senha_invalida)
+            } else {
+                senhasIguais = editTextPasswordCadastro.text.toString() == editTextConfirmarPasswordCadastro.text.toString()
+                if (!senhasIguais) {
+                    inputLayoutPasswordCadastro.error = getString(R.string.senhas_diferentes)
+                    inputLayoutConfirmaPasswordCadastro.error = getString(R.string.senhas_diferentes)
+                } else {
+                    inputLayoutPasswordCadastro.error = ""
+                    inputLayoutConfirmaPasswordCadastro.error = ""
+                }
             }
 
-            if(emailValido && senhaValida) cadastrar(emailCadastro.text.toString(), senhaCadastro.text.toString())
+            //SE TUDO ESTIVER CORRETO  ->  PODE CADASTRAR O USUÁRIO
+            if (emailValido && senhaValida && senhasIguais) {
+                cadastrar ( emailCadastro.text.toString(), editTextPasswordCadastro.text.toString())
+            }
         }
-
     }
 
     private fun cadastrar(email: String, password: String) {
         if (email.isEmpty()) {
-            Toast.makeText(this, getString(R.string.o_campo_email_nao_pode_estar_vazio), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.o_campo_email_nao_pode_estar_vazio), Toast.LENGTH_SHORT)
+                .show()
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val usuarioCadastrado = auth.currentUser
                         Log.d(TAG, "createUserWithEmail:success :  ${usuarioCadastrado?.email} ")
-                        Toast.makeText(this, "Usuário cadastrado é ${usuarioCadastrado?.email}", Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            this,
+                            "Usuário cadastrado é ${usuarioCadastrado?.email}",
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     } else {
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)

@@ -52,6 +52,7 @@
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="3dp"
         app:hintEnabled="true"
+        app:passwordToggleEnabled="true"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

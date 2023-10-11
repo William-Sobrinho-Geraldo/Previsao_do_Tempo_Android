@@ -6,6 +6,7 @@ import Android.Previsao_do_Tempo.databinding.ActivityMainBinding
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -28,14 +30,23 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
         val email = binding.editTextEmail
         val password = binding.editTextPassWord
-        val button = binding.botaoEntrar
+        val buttonEntrar = binding.botaoEntrar
         val linkCadastro = binding.linkDeCadastro
 
-        linkCadastro.setOnClickListener {
-            startActivity(Intent(this, CadastroActivity::class.java))
+        //NAVEGANDO PARA TELA DE CADASTRO
+        linkCadastro.setOnClickListener {startActivity(Intent(this, CadastroActivity::class.java))}
+
+        // ESCONDENDO SENHA AO CLICAR NO TOOGLE
+        binding.textInputLayoutSenha.setEndIconOnClickListener {
+            val passwordVisible = (password.inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)
+            val inputType = if (passwordVisible) InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            else InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            password.inputType = inputType
+            password.setSelection(password.text!!.length)
         }
 
-        button.setOnClickListener {
+        //VALIDANDO EMAIL E SENHA E AUTENTICANDO APÓS CLICAR EM ENTRAR
+        buttonEntrar.setOnClickListener {
             val emailValido = validaEmail(email.text.toString(), this)
             if (!emailValido) {
                 binding.textInputLayoutEmail.error = getString(R.string.email_invalido)
@@ -61,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun autenticaEmailEPassword(email: String, password: String, callback: (Boolean) -> Unit) {
+    private fun autenticaEmailEPassword(email: String, password: String, callback: (Boolean) -> Unit) {
 
         if (email.isEmpty() || password.isEmpty()) {
             callback(false)
