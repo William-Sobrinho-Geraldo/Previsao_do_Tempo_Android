@@ -3,6 +3,7 @@
 package Android.Previsao_do_Tempo
 
 import Android.Previsao_do_Tempo.databinding.ActivityMainBinding
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -30,14 +31,12 @@ class MainActivity : AppCompatActivity() {
         val button = binding.botaoEntrar
         val linkCadastro = binding.linkDeCadastro
 
-linkCadastro.setOnClickListener{
-    startActivity(Intent(this,CadastroActivity::class.java))
-}
-
-
+        linkCadastro.setOnClickListener {
+            startActivity(Intent(this, CadastroActivity::class.java))
+        }
 
         button.setOnClickListener {
-            val emailValido = validaEmail(email.text.toString())
+            val emailValido = validaEmail(email.text.toString(), this)
             if (!emailValido) {
                 binding.textInputLayoutEmail.error = getString(R.string.email_invalido)
             }
@@ -47,13 +46,15 @@ linkCadastro.setOnClickListener{
                 binding.textInputLayoutSenha.error = getString(R.string.senha_invalida)
             }
 
-            autenticaEmailEPassword(email.text.toString(), password.text.toString()) { resultado ->
-                if (resultado) {
-                    // Autenticação bem sucedida - Navegar para outra tela
-                    // startActivity(Intent(this,CadastroActivity::class.java))
-                    Log.i(TAG, "onCreate:    PODE NAVEGAR PRA OUTRA TELA")
-                } else {
-                    Log.i(TAG, "onCreate: autenticação inválida")
+            if (emailValido && senhaValida) {
+                autenticaEmailEPassword(email.text.toString(), password.text.toString()) { resultado ->
+                    if (resultado) {
+                        // Autenticação bem sucedida - Navegar para outra tela
+                        // startActivity(Intent(this,CadastroActivity::class.java))
+                        Log.i(TAG, "onCreate:    PODE NAVEGAR PRA OUTRA TELA")
+                    } else {
+                        Log.i(TAG, "onCreate: autenticação inválida")
+                    }
                 }
             }
         }
@@ -82,19 +83,17 @@ linkCadastro.setOnClickListener{
                 }
         }
     }
-
-    fun validaEmail(email: String): Boolean {
-        if (email.isEmpty()) {
-            Toast.makeText(this, " Email não pode estar em branco", Toast.LENGTH_SHORT).show()
-        }
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    fun validaSenha(password: String): Boolean {
-        val minLength = 6 // Mínimo de 6 caracteres
-        val hasDigit = password.any { it.isDigit() }
-        val hasUppercase = password.any { it.isUpperCase() }
-
-        return password.length >= minLength && hasDigit && hasUppercase
-    }
 }
+
+fun validaEmail(email: String, context: Context): Boolean {
+    if (email.isEmpty()) Toast.makeText(context, " Email não pode estar em branco", Toast.LENGTH_SHORT).show()
+    return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+}
+
+fun validaSenha(password: String): Boolean {
+    val minLength = 6                            // Mínimo de 6 caracteres
+    val hasDigit = password.any { it.isDigit() }
+    val hasUppercase = password.any { it.isUpperCase() }
+    return password.length >= minLength && hasDigit && hasUppercase
+}
+

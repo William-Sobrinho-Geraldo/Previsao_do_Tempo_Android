@@ -10,7 +10,7 @@
     <!--     TEXT EMAIL     -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_Email"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:boxBackgroundColor="@color/gray"
         app:boxCornerRadiusBottomEnd="8dp"
@@ -25,7 +25,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6">
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintWidth_percent="0.70">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_email"
@@ -40,7 +41,7 @@
     <!--     TEXT SENHA     -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_Senha"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:boxBackgroundColor="@color/gray"
@@ -52,10 +53,10 @@
         app:boxStrokeWidth="3dp"
         app:hintEnabled="true"
         app:hintTextColor="@color/black"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_Email">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_Email"
+        app:layout_constraintWidth_percent="0.70">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_PassWord"
@@ -71,6 +72,7 @@
         android:id="@+id/botao_entrar"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:textSize="22sp"
         android:text="@string/entrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,10 +95,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:textStyle="bold"
         android:layout_marginTop="8dp"
-        android:textColor="@color/azul"
         android:text="@string/cadastre_se"
+        android:textColor="@color/azul"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/Ainda_nao_tem_cadastro"
         app:layout_constraintTop_toBottomOf="@+id/botao_entrar" />
 
